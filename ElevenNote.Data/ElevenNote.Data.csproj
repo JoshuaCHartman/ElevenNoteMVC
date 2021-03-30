@@ -59,6 +59,10 @@
     <Compile Include="Migrations\202103292055360_added_note.Designer.cs">
       <DependentUpon>202103292055360_added_note.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103302224052_starred property.cs" />
+    <Compile Include="Migrations\202103302224052_starred property.Designer.cs">
+      <DependentUpon>202103302224052_starred property.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +74,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202103292055360_added_note.resx">
       <DependentUpon>202103292055360_added_note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103302224052_starred property.resx">
+      <DependentUpon>202103302224052_starred property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
