@@ -13,14 +13,28 @@
 
 @if (TempData.ContainsKey("SaveResult"))
 {
-<div class="alert alert-success fade in" role="alert">
+    <div class="alert alert-success fade in" role="alert">
 
-    <button type="button" class="close" data-dismiss="alert">
-        <span>&times;</span>
-    </button>
-    @ViewBag.SaveResult
-</div>
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
 }
+
+@*@if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="btn-group btn-group-lg" role="group">
+            <div class="alert alert-success fade in" role="alert">
+
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        </div>
+
+    }*@
 <table class="table">
     <tr>
         <th>
@@ -38,32 +52,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.NoteId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsStarred)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedUtc)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.NoteId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.NoteId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.NoteId })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoteId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStarred, new { Id = item.NoteId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedUtc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.NoteId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.NoteId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.NoteId })
+            </td>
+        </tr>
+    }
 
 </table>
 
 @section scripts {
-    
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
             $("i[data-toggle='star']")
@@ -78,18 +92,15 @@
                         url: "/api/note/" + noteId + "/star",
                         data: null
                     })
-
                         .done(function (r) {
                             target.removeClass();
-                            target.addClass("glyhpicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
+                            target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
                         })
                         .fail(function (r) {
                             alert("Failed to change star status");
                         });
-
                 });
         });
-
     </script>
 
-    }
+}
